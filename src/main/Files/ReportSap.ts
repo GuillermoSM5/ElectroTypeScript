@@ -1,14 +1,16 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import xlsx from 'xlsx-js-style';
-import { findGEID } from './Utils';
+import { findGEID, findSkills } from './Utils';
 
+let newFile = xlsx.utils.book_new();
+let newData: any[];
 export const readFile = (path: string, window: any) => {
-  let newFile = xlsx.utils.book_new();
   newFile = xlsx.utils.book_new();
   const sheet = xlsx.readFile(path);
   const content = sheet.Sheets.report;
-  const data = xlsx.utils.sheet_to_json(content);
+  const dataSap = xlsx.utils.sheet_to_json(content);
 
-  if (data.length === 0) {
+  if (dataSap.length === 0) {
     const responseObj = {
       txt: 'Elija un archivo con el formato correspondiente',
     };
@@ -18,7 +20,7 @@ export const readFile = (path: string, window: any) => {
     return;
   }
 
-  const newData = data.map((ref) => findGEID(ref));
+  newData = dataSap.map((ref) => findGEID(ref));
 
   const headers = [
     [
@@ -124,6 +126,7 @@ export const readFile = (path: string, window: any) => {
     'N3',
   ];
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const cellStyle = (cell: any) => {
     newSheet[cell].s = {
       fill: {
@@ -152,9 +155,23 @@ export const readFile = (path: string, window: any) => {
 
   cells.map((cell) => cellStyle(cell));
   xlsx.utils.book_append_sheet(newFile, newSheet, 'New Data');
-  console.log(newFile);
 
   window.webContents.send('finishReportSap');
 };
 
-export const hola = 'Hola';
+export const reportNewSkills = (path: string, window: any) => {
+  const sheet = xlsx.readFile(path);
+  const content = sheet.Sheets['SKILL oferta para Banamex '];
+  const data = xlsx.utils.sheet_to_json(content);
+  findSkills(data, newData);
+};
+
+export const saveFile = async (window: any, path: string) => {
+  if (path === '') {
+    // eslint-disable-next-line no-console
+    console.log('No eleigio ninguna ruta');
+  } else {
+    xlsx.writeFile(newFile, path);
+    window.webContents.send('resetData');
+  }
+};

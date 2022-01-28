@@ -16,7 +16,7 @@ import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
 import { resolveHtmlPath } from './util';
-import { openFileDialog } from './onpenDialogs';
+import { openFileDialog, openSaveDialog } from './onpenDialogs';
 
 export default class AppUpdater {
   constructor() {
@@ -82,8 +82,12 @@ const createWindow = async () => {
     },
   });
 
-  ipcMain.on('openFile', async (event, arg) => {
-    openFileDialog(mainWindow);
+  ipcMain.on('openFile', async (_, { report }) => {
+    openFileDialog(mainWindow, report);
+  });
+
+  ipcMain.on('saveFile', async () => {
+    openSaveDialog(mainWindow);
   });
 
   mainWindow.loadURL(resolveHtmlPath('index.html'));

@@ -3,10 +3,6 @@ import './App.css';
 import MainScreen from './components/MainScreen';
 
 const Hello = () => {
-  window.electron.api.receive('finishReportSap', (data: string) => {
-    console.log(data);
-  });
-
   return (
     <div>
       <MainScreen />

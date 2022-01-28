@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable prefer-destructuring */
 /* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable prefer-template */
@@ -132,6 +133,13 @@ export const findGEID = (data: any) => {
   };
 };
 
-/* Funciones auxiliares */
-
-export const prueba = 'prueba';
+export const findSkills = (data: any, dataSap: any[]) => {
+  let newData: any[];
+  for (const value of dataSap) {
+    if (value.GEID !== 'undefined') {
+      data.forEach((persona: any) => {
+        console.log(persona);
+      });
+    }
+  }
+};
