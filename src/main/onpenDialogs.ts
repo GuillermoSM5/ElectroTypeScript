@@ -1,3 +1,5 @@
+/* eslint-disable import/newline-after-import */
+import { readFile } from './Files/ReportSap';
 const { dialog } = require('electron');
 
 export const openFileDialog = async (window: any) => {
@@ -8,6 +10,7 @@ export const openFileDialog = async (window: any) => {
   if (resp.filePaths.length === 0) {
     console.log('No se selecciono un archivo');
   } else {
+    readFile(resp.filePaths[0], window);
     window.webContents.send('finishReportSap', { data: 'Modal Abierto' });
   }
 };
