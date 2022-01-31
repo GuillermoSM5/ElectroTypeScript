@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable prefer-destructuring */
 /* eslint-disable @typescript-eslint/naming-convention */
@@ -133,13 +134,26 @@ export const findGEID = (data: any) => {
   };
 };
 
-export const findSkills = (data: any, dataSap: any[]) => {
-  let newData: any[];
-  for (const value of dataSap) {
-    if (value.GEID !== 'undefined') {
-      data.forEach((persona: any) => {
-        console.log(persona);
-      });
+export const findSkills = (persona: any, data: any) => {
+  let newPerson: any;
+  for (const iterator of data) {
+    // eslint-disable-next-line no-underscore-dangle
+    if (iterator.__EMPTY === persona.GEID) {
+      newPerson = iterator;
+      break;
     }
+    return { ...persona };
   }
+
+  return {
+    ...persona,
+    Perfil: newPerson.__EMPTY_6 || '',
+    ConocimientoCompetencia: newPerson.__EMPTY_7 || '',
+    SistemaAplicacion: newPerson.__EMPTY_8 || '',
+    Nivel: newPerson.__EMPTY_9 || '',
+    CertificadoEnElConocimiento: newPerson.__EMPTY_10 || '',
+    EmpresaQueCertificaElConocimiento: newPerson.__EMPTY_11 || '',
+    Adminstrado: 'Stefanini',
+    Status: 'Lleno',
+  };
 };

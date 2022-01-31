@@ -163,7 +163,13 @@ export const reportNewSkills = (path: string, window: any) => {
   const sheet = xlsx.readFile(path);
   const content = sheet.Sheets['SKILL oferta para Banamex '];
   const data = xlsx.utils.sheet_to_json(content);
-  findSkills(data, newData);
+  // newData.forEach((persona) => {
+  //   findSkills(persona, data);
+  // });
+  data.forEach((element) => {
+    return findSkills(element, data);
+  });
+  console.log(data);
 };
 
 export const saveFile = async (window: any, path: string) => {
