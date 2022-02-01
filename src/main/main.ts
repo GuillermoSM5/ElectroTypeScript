@@ -26,6 +26,8 @@ export default class AppUpdater {
   }
 }
 
+process.setMaxListeners(20);
+
 let mainWindow: BrowserWindow | null = null;
 
 ipcMain.on('ipc-example', async (event, arg) => {

@@ -33,6 +33,7 @@ contextBridge.exposeInMainWorld('electron', {
         'resetData',
         'alertWrongFormat',
         'finishReportSap',
+        'finishReportSkills',
       ];
       if (validChannels.includes(channel)) {
         // Deliberately strip event as it includes `sender`

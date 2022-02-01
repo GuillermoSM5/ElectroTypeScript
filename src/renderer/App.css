@@ -73,4 +73,26 @@ a:hover {
 .buttonContainer {
   display: flex;
   flex-direction: column;
+  max-width: 500px;
+}
+
+.errorAlert {
+  margin-top: 20px;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+  color: #a94442;
+  border: 1px solid transparent;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 1.3rem;
+  width: 500px;
+  text-align: center;
+}
+
+.content {
+  min-width: 600px;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
