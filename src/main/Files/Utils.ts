@@ -140,20 +140,22 @@ export const findSkills = (persona: any, data: any) => {
     // eslint-disable-next-line no-underscore-dangle
     if (iterator.__EMPTY === persona.GEID) {
       newPerson = iterator;
+      // console.log(newPerson);
       break;
     }
-    return { ...persona };
+    // return { ...persona };
   }
-
-  return {
-    ...persona,
-    Perfil: newPerson.__EMPTY_6 || '',
-    ConocimientoCompetencia: newPerson.__EMPTY_7 || '',
-    SistemaAplicacion: newPerson.__EMPTY_8 || '',
-    Nivel: newPerson.__EMPTY_9 || '',
-    CertificadoEnElConocimiento: newPerson.__EMPTY_10 || '',
-    EmpresaQueCertificaElConocimiento: newPerson.__EMPTY_11 || '',
-    Adminstrado: 'Stefanini',
-    Status: 'Lleno',
-  };
+  return newPerson
+    ? {
+        ...persona,
+        Perfil: newPerson.__EMPTY_6 || '',
+        ConocimientoCompetencia: newPerson.__EMPTY_7 || '',
+        SistemaAplicacion: newPerson.__EMPTY_8 || '',
+        Nivel: newPerson.__EMPTY_9 || '',
+        CertificadoEnElConocimiento: newPerson.__EMPTY_10 || '',
+        EmpresaQueCertificaElConocimiento: newPerson.__EMPTY_11 || '',
+        Adminstrado: 'Stefanini',
+        Status: 'Lleno',
+      }
+    : { ...persona, Status: 'Vacio' };
 };

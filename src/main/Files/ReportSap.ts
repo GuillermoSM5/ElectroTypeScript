@@ -166,10 +166,10 @@ export const reportNewSkills = (path: string, window: any) => {
   // newData.forEach((persona) => {
   //   findSkills(persona, data);
   // });
-  data.forEach((element) => {
+  const dataSkillReport = newData.map((element) => {
     return findSkills(element, data);
   });
-  console.log(data);
+  console.log(dataSkillReport);
 };
 
 export const saveFile = async (window: any, path: string) => {
